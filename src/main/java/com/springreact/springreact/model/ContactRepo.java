@@ -1,5 +1,7 @@
 package com.springreact.springreact.model;
 
-public class ContactRepo {
-    
+import org.springframework.data.repository.CrudRepository;
+
+public interface ContactRepo extends CrudRepository<Contact, Long> {
+
 }

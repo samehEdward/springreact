@@ -13,12 +13,8 @@ public class Contact {
     private String lastName;
     private String email;
 
-    
-
-
     public Contact() {
     }
-
 
     public Contact(Long id, String firstName, String lastName, String email) {
         this.id = id;
@@ -27,7 +23,4 @@ public class Contact {
         this.email = email;
     }
 
-    
-
-    
 }
