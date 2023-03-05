@@ -1,47 +1,55 @@
 import React, { Component } from "react";
 
 export default class AddContacts extends Component {
+  submitContact(event) {
+    event.preventDefault();
+
+    let contact = {
+      firstName: this.refs.firstName.value,
+      lastName: this.refs.lastName.value,
+      email: this.refs.email.value,
+    };
+
+    fetch("http://localhost:8080/api/contacts", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(contact),
+    }).then((response) => response.json());
+
+    window.location.reload();
+  }
+
   render() {
     return (
       <div class="row">
-        <form class="col s12">
+        <form class="col s12" onSubmit={this.submitContact.bind(this)}>
           <div class="row">
             <div class="input-field col s6">
-              <input
-                placeholder="Placeholder"
-                id="first_name"
-                type="text"
-                className="validate"
-              />
-              <label for="first_name">First Name</label>
+              <input ref="firstName" type="text" className="validate" />
+              <label htmlFor="firstName">First Name</label>
             </div>
             <div class="input-field col s6">
-              <input id="last_name" type="text" className="validate" />
-              <label for="last_name">Last Name</label>
+              <input ref="lastName" type="text" className="validate" />
+              <label htmlFor="lastName">Last Name</label>
             </div>
           </div>
 
           <div class="row">
             <div class="input-field col s12">
-              <input id="email" type="email" className="validate" />
-              <label for="email">Email</label>
+              <input ref="email" type="email" className="validate" />
+              <label htmlFor="email">Email</label>
             </div>
           </div>
           <div class="row">
-            <div class="col s12">
-              This is an inline input field:
-              <div class="input-field inline">
-                <input id="email_inline" type="email" className="validate" />
-                <label for="email_inline">Email</label>
-                <span
-                  class="helper-text"
-                  data-error="wrong"
-                  data-success="right"
-                >
-                  Helper text
-                </span>
-              </div>
-            </div>
+            <button
+              className="waves-effect waves-light btn"
+              type="submit"
+              name="action"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
